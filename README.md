@@ -54,11 +54,7 @@ bun test          # 13 tests, 36 assertions
 bun run demo      # full lifecycle walkthrough with event logging
 ```
 
-Or install it as a dependency of your own project:
-
-```bash
-bun add ai-agent-sdk-typescript
-```
+> **Note:** This SDK is not published to npm yet. To use it in another project, clone this repo and run `bun link`, or copy `src/` into your project — the package has a single runtime dependency (`commander`).
 
 ## Example 1: hello, agent
 
