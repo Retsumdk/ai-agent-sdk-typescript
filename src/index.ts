@@ -1,51 +1,27 @@
-#!/usr/bin/env bun
 /**
- * ai-agent-sdk-typescript - TypeScript SDK for building AI agents with standardized interfaces, lifecycle management, and plugin architecture
- * Built by Retsumdk
+ * ai-agent-sdk — TypeScript SDK for building AI agents.
+ *
+ * Exports the Agent class, tool/plugin primitives, and built-in tools.
  */
 
-import { Command } from "commander";
-import { existsSync, readFileSync } from "fs";
-import { join } from "path";
-
-interface Config {
-  apiKey?: string;
-  baseUrl: string;
-  timeout: number;
-  retries: number;
-}
-
-const DEFAULTS: Config = {
-  baseUrl: "https://api.example.com",
-  timeout: 30000,
-  retries: 3,
-};
-
-function loadConfig(): Config {
-  const cfgPath = join(process.cwd(), "config.json");
-  if (existsSync(cfgPath)) {
-    try {
-      return { ...DEFAULTS, ...JSON.parse(readFileSync(cfgPath, "utf-8")) };
-    } catch { /* ignore */ }
-  }
-  return { ...DEFAULTS };
-}
-
-async function main(cfg: Config) {
-  console.log(`[${name}] Connected to ${cfg.baseUrl}`);
-  console.log(`[${name}] Timeout: ${cfg.timeout}ms | Retries: ${cfg.retries}`);
-  // TODO: implement your logic here
-  console.log(`[${name}] Done.`);
-}
-
-const program = new Command();
-program.name("ai-agent-sdk-typescript").description("TypeScript SDK for building AI agents with standardized interfaces, lifecycle management, and plugin architecture").version("1.0.0")
-  .option("-c, --config <path>", "Config file path", "config.json")
-  .option("-v, --verbose", "Verbose mode")
-  .action(async (opts) => {
-    const cfg = loadConfig();
-    if (opts.verbose) console.log("Verbose mode on");
-    try { await main(cfg); }
-    catch (e) { console.error(`Error: ${e}`); process.exit(1); }
-  });
-program.parse(process.argv);
+export { Agent } from "./agent";
+export { SimpleMemoryStore, ToolRegistry, PluginManager } from "./internals";
+export {
+  AgentStateError,
+  ToolError,
+} from "./types";
+export type {
+  AgentConfig,
+  AgentContext,
+  AgentEvent,
+  AgentEventType,
+  AgentState,
+  MemoryStore,
+  Plugin,
+  RunResult,
+  TaskResult,
+  TaskInput,
+  Tool,
+  ToolResult,
+} from "./types";
+export { createClockTool, createEchoTool, createMathTool } from "./tools";

@@ -1,11 +1,39 @@
 {
   "name": "ai-agent-sdk-typescript",
-  "description": "TypeScript SDK for building AI agents with standardized interfaces, lifecycle management, and plugin architecture",
-  "version": "1.0.0",
+  "description": "TypeScript SDK for building AI agents with a guarded lifecycle, typed tools, a plugin system, and an event bus",
+  "version": "1.1.0",
+  "license": "MIT",
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "keywords": [
+    "ai",
+    "agents",
+    "agent-framework",
+    "typescript",
+    "sdk",
+    "tools",
+    "plugins",
+    "lifecycle",
+    "event-bus"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "test": "bun test",
-    "build": "tsc"
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "demo": "bun src/cli.ts"
+  },
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Retsumdk/ai-agent-sdk-typescript.git"
   },
   "dependencies": {
     "commander": "^11.1.0"
